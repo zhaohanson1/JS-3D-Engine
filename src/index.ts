@@ -1,7 +1,9 @@
 // Store the original console.error function
+// import initGL from "./gl.js";
+import { initCanvas, fillCanvas } from "./shitty-renderer/canvas.js";
+import { range } from "./utils.js";
 
-
-function errorLogger(data) {
+function errorLogger(data: string) {
   const url = "/log-error"; // Replace with your API endpoint URL
 
   fetch(url, {
@@ -9,7 +11,7 @@ function errorLogger(data) {
     headers: {
       "Content-Type": "application/json", // Set the content type to JSON
     },
-    body: JSON.stringify({error: data}), // Convert JavaScript object to JSON string
+    body: JSON.stringify({ error: data }), // Convert JavaScript object to JSON string
   })
     .then((response) => {
       if (!response.ok) {
@@ -27,8 +29,24 @@ function errorLogger(data) {
     });
 }
 
-
-
-window.onerror = function(message, url, lineNumber) {
+window.onerror = function (
+  message: string,
+  _source: string,
+  _lineNumber: number
+) {
   errorLogger(message);
 };
+
+try {
+  // initGL();
+  initCanvas();
+  const rangeArr = range(255);
+  const arr = rangeArr
+    .map((x) =>
+      rangeArr.map((y) => ({ r: x, g: y, b: 0 })
+    ))
+    .flat();
+  fillCanvas(arr);
+} catch (error) {
+  errorLogger(error);
+}
