@@ -45,7 +45,14 @@ try {
     .map((x) =>
       rangeArr.map((y) => ({ r: x, g: y, b: 0 })
     ))
-    .flat();
+    .flat()
+    .sort( 
+      (a, b) => {
+      if (a.r !== b.r) {
+          return a.r - b.r;
+      }
+    return a.g - b.g;
+  });
   fillCanvas(arr);
 } catch (error) {
   errorLogger(error);

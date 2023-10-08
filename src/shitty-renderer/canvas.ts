@@ -8,9 +8,9 @@ let _base: HTMLElement;
 let _pixelSize: number;
 
 export const initCanvas = (
-  width: number = 256,
-  height: number = 256,
-  pixelSize: number = 4
+  width: number = 255,
+  height: number = 255,
+  pixelSize: number = 2
 ): void => {
   const base = document.createElement("div");
   _base = base;

@@ -1,6 +1,6 @@
 let _base;
 let _pixelSize;
-export const initCanvas = (width = 256, height = 256, pixelSize = 4) => {
+export const initCanvas = (width = 255, height = 255, pixelSize = 2) => {
     const base = document.createElement("div");
     _base = base;
     _pixelSize = pixelSize;
