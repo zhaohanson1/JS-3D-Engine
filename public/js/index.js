@@ -1,4 +1,4 @@
-import { initCanvas, fillCanvas } from "./shitty-renderer/canvas.js";
+import { initCanvas, drawOnCanvas, render } from "./shitty-renderer/canvas.js";
 import { range } from "./utils.js";
 function errorLogger(data) {
     const url = "/log-error";
@@ -28,16 +28,15 @@ window.onerror = function (message, _source, _lineNumber) {
 try {
     initCanvas();
     const rangeArr = range(255);
-    const arr = rangeArr
-        .map((x) => rangeArr.map((y) => ({ r: x, g: y, b: 0 })))
-        .flat()
-        .sort((a, b) => {
-        if (a.r !== b.r) {
-            return a.r - b.r;
+    const arr = rangeArr.map((x) => rangeArr.map((y) => ({ r: x, g: y, b: 0 })));
+    arr.sort((a, b) => {
+        if (a[0].r !== b[0].r) {
+            return a[0].r - b[0].r;
         }
-        return a.g - b.g;
+        return a[0].g - b[0].g;
     });
-    fillCanvas(arr);
+    drawOnCanvas(arr);
+    render();
 }
 catch (error) {
     errorLogger(error);

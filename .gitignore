@@ -134,3 +134,4 @@ replit.nix
 .prettierignore
 
 logs/*
+public/js
